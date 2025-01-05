@@ -114,14 +114,12 @@ end
 
 function modificators:Stage6(chances)
 
-    for index,pickup in pairs(chances) do
+    for pickup,chance in pairs(chances) do
 
-        if index == PickupVariant.PICKUP_CHEST or index == PickupVariant.PICKUP_BOMBCHEST or index == PickupVariant.PICKUP_LOCKEDCHEST then
-            chances = chances * 2.5
-        end
-
-        if not is_chest then
-            chances[index] = chances[index] * 0.8
+        if pickup == PickupVariant.PICKUP_CHEST or pickup == PickupVariant.PICKUP_BOMBCHEST or pickup == PickupVariant.PICKUP_LOCKEDCHEST then
+            chances[pickup] = chance * 4
+        else
+            chances[pickup] = chance * 0.8
         end
 
     end
@@ -131,10 +129,10 @@ end
 
 function modificators:LuckyFoot(chances)
 
-    for index,pickup in pairs(chances) do
+    for pickup,chance in pairs(chances) do
 
         if index == PickupVariant.PICKUP_COIN or index == PickupVariant.PICKUP_KEY or index == PickupVariant.PICKUP_BOMB then
-            chances[index] = chances[index] * 1.5
+            chances[pickup] = chances[pickup] * 1.5
         end
 
     end

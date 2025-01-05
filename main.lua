@@ -12,10 +12,10 @@ local DEFAULT_CHANCES = {
     [PickupVariant.PICKUP_PILL] = 50,
     [PickupVariant.PICKUP_GRAB_BAG] = 50,
     [PickupVariant.PICKUP_TAROTCARD] = 50,
-    [PickupVariant.PICKUP_BOMBCHEST] = 50,
-    [PickupVariant.PICKUP_LOCKEDCHEST] = 50,
+    [PickupVariant.PICKUP_BOMBCHEST] = 20,
     [PickupVariant.PICKUP_LIL_BATTERY] = 25,
-    [PickupVariant.PICKUP_CHEST] = 20,
+    [PickupVariant.PICKUP_LOCKEDCHEST] = 20,
+    [PickupVariant.PICKUP_CHEST] = 50,
     [PickupVariant.PICKUP_REDCHEST] = 10,
     [PickupVariant.PICKUP_TRINKET] = 10,
     [PickupVariant.PICKUP_SPIKEDCHEST] = 5,
@@ -97,12 +97,14 @@ local function applyModificators(current_chances)
 
     for collectible, func in pairs(modificator_collectible_functions) do
         if player:HasCollectible(collectible) then
+            helpers:debug("Collectible: " .. tostring(collectible))
             current_chances = func(modificators, current_chances)
         end
     end
 
     for trinket, func in pairs(modificator_trinket_functions) do
         if player:HasTrinket(trinket) then
+            helpers:debug("Collectible: " .. tostring(collectible))
             current_chances = func(modificators, current_chances)
         end
     end
@@ -175,6 +177,10 @@ local function spawnUnlockedPickup()
 
     helpers:debug("Random Number: " .. tostring(rng_value))
 
+    for pickup_type, chance in pairs(unlocked_pickups) do
+        helpers:debug("Pickup: " .. helpers:pickupName(pickup_type) .. " Chance: " .. tostring(chance))
+    end
+
     -- Spawn unlocked pickups
     for pickup_type, chance in pairs(unlocked_pickups) do
 
@@ -201,12 +207,12 @@ local function spawnUnlockedPickup()
 
         -- end
 
-        helpers:debug("rng_end: " .. tostring(rg_end) .. " PICKUP " .. helpers:pickupName(pickup_type))
+        -- helpers:debug("rng_end: " .. tostring(rg_end) .. " PICKUP " .. helpers:pickupName(pickup_type))
 
         if rg_init <= rng_value and rng_value < rg_end then
             helpers:debug("Spawned unlocked pickup: " .. tostring(pickup_type) .. " Pickup " .. helpers:pickupName(pickup_type))
             Isaac.Spawn(EntityType.ENTITY_PICKUP, pickup_type, 0, position, Vector(0, 0), nil)
-            return true
+            --return true
         end
     end
 
