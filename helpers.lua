@@ -68,4 +68,16 @@ function helpers:contains(item, array)
     return false
 end
 
+helpers.PICKUP_CHESTS = {
+    PickupVariant.PICKUP_BOMBCHEST,
+    PickupVariant.PICKUP_SPIKEDCHEST,
+    PickupVariant.PICKUP_ETERNALCHEST,
+    PickupVariant.PICKUP_MIMICCHEST,
+    PickupVariant.PICKUP_OLDCHEST,
+    PickupVariant.PICKUP_WOODENCHEST,
+    PickupVariant.PICKUP_HAUNTEDCHEST,
+    PickupVariant.PICKUP_LOCKEDCHEST,
+    PickupVariant.PICKUP_REDCHEST,
+}
+
 return helpers
